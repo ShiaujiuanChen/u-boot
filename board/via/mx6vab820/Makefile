@@ -6,4 +6,4 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
-obj-y  := mx6vab820.o ../common/phy.o ../common/info.o
+obj-y  := mx6vab820.o ../common/phy.o ../common/info.o ../common/cmd.o

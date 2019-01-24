@@ -50,6 +50,14 @@ DECLARE_GLOBAL_DATA_PTR;
 
 static struct spi_flash *env_flash;
 
+#ifdef CMD_SAVEENV
+/* default: not destroy environment */
+__weak int in_destroyenv(void)
+{
+	return 0;
+}
+#endif
+
 static int setup_flash_device(void)
 {
 #ifdef CONFIG_DM_SPI_FLASH
@@ -237,11 +245,13 @@ static int env_sf_save(void)
 	if (ret)
 		goto done;
 
-	puts("Writing to SPI flash...");
-	ret = spi_flash_write(env_flash, CONFIG_ENV_OFFSET,
-		CONFIG_ENV_SIZE, &env_new);
-	if (ret)
-		goto done;
+	if (!in_destroyenv())	{
+		puts("Writing to SPI flash...");
+		ret = spi_flash_write(env_flash, CONFIG_ENV_OFFSET,
+			CONFIG_ENV_SIZE, &env_new);
+		if (ret)
+			goto done;
+	}
 
 	if (CONFIG_ENV_SECT_SIZE > CONFIG_ENV_SIZE) {
 		ret = spi_flash_write(env_flash, saved_offset,
