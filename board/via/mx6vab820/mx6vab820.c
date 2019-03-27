@@ -574,6 +574,8 @@ int board_late_init(void)
 		env_set("board_rev", "MX6Q");
 	else if (is_mx6sdl())
 		env_set("board_rev", "MX6DL");
+
+	env_set_hex("reset_cause", get_imx_reset_cause());
 #endif
 
 	return 0;
