@@ -429,15 +429,6 @@ static void __maybe_unused setup_display(void)
 }
 #endif /* CONFIG_VIDEO_IPUV3 */
 
-/*
- * Do not overwrite the console
- * Use always serial for U-Boot console
- */
-int overwrite_console(void)
-{
-	return 1;
-}
-
 int board_eth_init(bd_t *bis)
 {
 	setup_iomux_enet();

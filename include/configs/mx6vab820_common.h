@@ -36,6 +36,8 @@
 #define CONFIG_SF_DEFAULT_MODE		SPI_MODE_0
 #endif
 
+#define CONFIG_PREBOOT ""		// "usb start" - detect the USB devices automatically at boot
+
 #ifdef CONFIG_SUPPORT_EMMC_BOOT
 #define EMMC_ENV \
 	"emmcdev=1\0" \
